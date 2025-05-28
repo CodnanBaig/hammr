@@ -10,7 +10,11 @@
     "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "build:netlify": "npm run clean && npm run generate && npm run build:next",
+    "clean": "rm -rf .next",
+    "generate": "npx prisma generate",
+    "build:next": "next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
