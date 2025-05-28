@@ -587,29 +587,14 @@ export default function AboutPage() {
 
                     {/* Right side - Images */}
                     <div className="space-y-6">
-                      <div className="relative h-64 w-full rounded-xl overflow-hidden">
+                      <div className="relative h-[600px] w-full rounded-xl overflow-hidden">
                         <Image
-                          src="/hero-carousel-images/IMG_4718.JPG"
-                          alt="International Championship Experience"
+                          src="/Hammer-Images/IMG_3064.JPG"
+                          alt="Professional Experience"
                           fill
                           className="object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
-                        <p className="absolute bottom-4 left-4 text-white font-medium">
-                          International Championship Experience
-                        </p>
-                      </div>
-                      <div className="relative h-64 w-full rounded-xl overflow-hidden">
-                        <Image
-                          src="/Hammer-Images/Daddy pic.jpg"
-                          alt="Sports Physiotherapy Legacy"
-                          fill
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
-                        <p className="absolute bottom-4 left-4 text-white font-medium">
-                          Sports Physiotherapy Legacy
-                        </p>
                       </div>
                     </div>
                   </div>

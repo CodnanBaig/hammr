@@ -3,44 +3,18 @@
 import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { LogOut, Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import BookingModal from "@/components/booking-modal"
 import { usePathname, useRouter } from "next/navigation"
-import Cookies from 'js-cookie'
-import { toast } from "./ui/use-toast"
+import { ThemeToggle } from "./theme-toggle"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isOnlineServicesOpen, setIsOnlineServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter()
   const pathname = usePathname();
-
-  
-  const checkAdminCookie = () => {
-    const adminToken = Cookies.get('admin_token')
-    setIsAdmin(!!adminToken)
-  }
-
-  useEffect(() => {
-    checkAdminCookie()
-    const intervalId = setInterval(checkAdminCookie, 600000)
-
-    return () => clearInterval(intervalId)
-  }, [])
-
-  useEffect(() => {
-    checkAdminCookie()
-  }, [pathname])
-
-  const handleLogout = () => {
-    Cookies.remove('admin_token', { path: '/' })
-    setIsAdmin(false);
-    
-    router.push("/kits/login")
-  }
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
@@ -133,22 +107,15 @@ export default function Header() {
             className="text-sm font-medium hover:text-teal-600 transition-colors">
             Pricing
           </Link>
+          <Link href="/services" className="text-sm font-medium hover:text-teal-600 transition-colors">
+            Services
+          </Link>
           <Link href="/contact" className="text-sm font-medium hover:text-teal-600 transition-colors">
             Contact
           </Link>
+          <ThemeToggle />
         </nav>
         <div className="hidden md:flex">
-          {isAdmin && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleLogout}
-              className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 mr-2 flex items-center gap-1"
-            >
-              <LogOut className="h-4 w-4" />
-              Logout
-            </Button>
-          )}
           <Button asChild className="bg-teal-600 cursor-pointer hover:bg-teal-700" onClick={() => setOpen(true)}>
             <span>Book Now</span>
           </Button>
@@ -231,22 +198,22 @@ export default function Header() {
               Pricing
             </Link>
             <Link
+              href="/services"
+              className="text-sm font-medium hover:text-teal-600 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Services
+            </Link>
+            <Link
               href="/contact"
               className="text-sm font-medium hover:text-teal-600 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
             </Link>
-            {isAdmin && (
-              <Button
-                variant="outline"
-                onClick={handleLogout}
-                className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 flex items-center justify-center gap-1"
-              >
-                <LogOut className="h-4 w-4" />
-                Logout
-              </Button>
-            )}
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+            </div>
             <Button
               asChild
               className="bg-teal-600 cursor-pointer hover:bg-teal-700 w-full"
